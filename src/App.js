@@ -8,9 +8,10 @@ class App extends React.Component {
         data: {},
     }
 
+    // fetch data from api
    async componentDidMount() {
         const fetchedData = await fetchData();
-
+        console.log(fetchedData); // for debugging 
         this.setState({
             data: fetchedData,
         });
@@ -18,6 +19,7 @@ class App extends React.Component {
 
     render() {
 
+        // a better way to send props
         const { data } = this.state;
 
         return(
