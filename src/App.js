@@ -6,6 +6,7 @@ class App extends React.Component {
 
     state = {
         data: {},
+        country: ''
     }
 
     // fetch data from api
@@ -17,16 +18,25 @@ class App extends React.Component {
         });
     }
 
-    render() {
+    handleCountryChange = async (country) => {
+        
+        const fetchedData = await fetchData(country);
 
+        this.setState({
+            data: fetchedData,
+            country:country
+        })
+    }
+
+    render() {
         // a better way to send props
-        const { data } = this.state;
+        const { data, country } = this.state;
 
         return(
             <div className={ styles.container }>
                 <Cards data={ data } />
-                <CountryPicker />
-                <Charts />
+                <CountryPicker handleCountryChange={this.handleCountryChange} />
+                <Charts data={ data } country={ country } />
             </div>
         )
     }
